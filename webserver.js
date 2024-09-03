@@ -24,11 +24,14 @@ app.get("/prognosis.js", (req, res) => {
 // Handle GET requests to /prognosis
 app.get("/prognosis", (req, res) => {
   const { month, day, hour } = req.query;
+  console.log(month);
+  console.log(day);
+  console.log(hour);
   const scriptPath = path.join(__dirname, "predict.py");
 
   // Call the Python script
   execFile(
-    "python3",
+    "python3.10",
     [scriptPath, month, day, hour],
     (error, stdout, stderr) => {
       if (error) {
