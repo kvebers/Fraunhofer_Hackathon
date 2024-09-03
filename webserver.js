@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const http = require("http");
+const { execFile } = require("child_process");
 const fs = require("fs");
 
 require("dotenv").config();
@@ -23,18 +24,29 @@ app.get("/prognosis.js", (req, res) => {
 // Handle GET requests to /prognosis
 app.get("/prognosis", (req, res) => {
   const { month, day } = req.query;
+  const scriptPath = path.join(__dirname, "predict.py");
 
-  // Here you can process the month and day parameters and generate a response
-  const response = {
-    message: `The prognosis for ${month}/${day} is looking good!`
-  };
+  // Call the Python script
+  execFile("python3", [scriptPath, month, day], (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error executing script: ${error}`);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
 
-  res.json(response);
-});
+    if (stderr) {
+      console.error(`Script stderr: ${stderr}`);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
 
-// Catch-all route to handle any other requests
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "index.html"));
+    // Parse the JSON output from the Python script
+    try {
+      const output = JSON.parse(stdout);
+      res.json(output);
+    } catch (parseError) {
+      console.error(`Error parsing JSON: ${parseError}`);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  });
 });
 
 const httpServer = http.createServer(app);
