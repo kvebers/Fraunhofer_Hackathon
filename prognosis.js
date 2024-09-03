@@ -2,9 +2,10 @@ document.getElementById('prognosisForm').addEventListener('submit', function (ev
     event.preventDefault();  // Prevent the form from submitting the traditional way
     const month = document.getElementById("monthSelect").value;
     const day = document.getElementById("daySelect").value;
+    const hour = document.getElementById("hourSelect").value;
 
     // Create the query string parameters for month and day
-    const queryParams = `?month=${month}&day=${day}`;
+    const queryParams = `?month=${month}&day=${day}&${hour}`;
 
     // Fetch the prognosis from the server
     fetch(`/prognosis${queryParams}`, {

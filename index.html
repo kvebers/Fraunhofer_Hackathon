@@ -42,6 +42,15 @@
 				<option value="12">December</option>
 			</select>
 
+			<select id="hourSelect" name="hourSelect" class="form-select" required>
+				<option value="">Select an hour</option>
+				<script>
+					for (let i = 0; i < 24; i++) {
+						document.write(`<option value="${i}">${i}</option>`);
+					}
+				</script>
+			</select>
+
 			<br>
 			<div class="d-flex justify-content-center">
 				<button type="submit" class="btn btn-light">Submit</button>
