@@ -20,8 +20,8 @@ public_holidays_bw_2022 = [
     "2022-12-26"   # Boxing Day
 ]
 
-parkhaus_mitte = pd.read_csv("data/parkhaus_mitte.csv")
-parkhaus_ost = pd.read_csv("data/parkplatz_ost.csv")
+parkhaus_mitte = pd.read_csv("../data/parkhaus_mitte.csv")
+parkhaus_ost = pd.read_csv("../data/parkplatz_ost.csv")
 parkhaus_mitte['Date'] = pd.to_datetime(parkhaus_mitte['Date'])
 parkhaus_ost['Date'] = pd.to_datetime(parkhaus_ost['Date'])
 public_holidays_bw_2022 = pd.to_datetime(public_holidays_bw_2022)
