@@ -26,14 +26,14 @@ parkhaus_mitte['Date'] = pd.to_datetime(parkhaus_mitte['Date'])
 parkhaus_ost['Date'] = pd.to_datetime(parkhaus_ost['Date'])
 public_holidays_bw_2022 = pd.to_datetime(public_holidays_bw_2022)
 def is_holiday_or_weekend(date):
-    if date in public_holidays_bw_2022:
-        return 1
-    elif date.weekday() >= 5:
+    if date in public_holidays_bw_2022 and date.hour >= 8 and date.hour <= 18:
+        return 2
+    elif date.weekday() >= 5 and date.hour >= 8 and date.hour <= 22:
         return 1
     else:
         return 0
 
 parkhaus_mitte['Holiday_Weekend'] = parkhaus_mitte['Date'].apply(is_holiday_or_weekend)
 parkhaus_ost['Holiday_Weekend'] = parkhaus_ost['Date'].apply(is_holiday_or_weekend)
-parkhaus_mitte.to_csv("data/updated_parkhaus_mitte.csv", index=False)
-parkhaus_ost.to_csv("data/updated_parkplatz_ost.csv", index=False)
+parkhaus_mitte.to_csv("../data/parkhaus_mitte.csv", index=False)
+parkhaus_ost.to_csv("../data/parkplatz_ost.csv", index=False)
