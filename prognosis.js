@@ -26,8 +26,14 @@ document
       .then((data) => {
         // Handle the response data
         document.getElementById("responseText1").innerHTML =
-          "Building campus Mitte " + data.mitte + "<br>" + "Buildings campus Ost" + data.ost + "<br>" +  "TheresianStrase" +data.theresian;
-        console.log("something happened"); // Display the message from the JSON response
+          "Mitte " +
+          data.mitte +
+          "<br>" +
+          "Ost " +
+          data.ost +
+          "<br>" +
+          "Theresian " +
+          data.theresian; // Display the message from the JSON response
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
