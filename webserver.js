@@ -23,30 +23,34 @@ app.get("/prognosis.js", (req, res) => {
 
 // Handle GET requests to /prognosis
 app.get("/prognosis", (req, res) => {
-  const { month, day } = req.query;
+  const { month, day, hour } = req.query;
   const scriptPath = path.join(__dirname, "predict.py");
 
   // Call the Python script
-  execFile("python3", [scriptPath, month, day], (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Error executing script: ${error}`);
-      return res.status(500).json({ error: "Internal Server Error" });
-    }
+  execFile(
+    "python3",
+    [scriptPath, month, day, hour],
+    (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error executing script: ${error}`);
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
 
-    if (stderr) {
-      console.error(`Script stderr: ${stderr}`);
-      return res.status(500).json({ error: "Internal Server Error" });
-    }
+      if (stderr) {
+        console.error(`Script stderr: ${stderr}`);
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
 
-    // Parse the JSON output from the Python script
-    try {
-      const output = JSON.parse(stdout);
-      res.json(output);
-    } catch (parseError) {
-      console.error(`Error parsing JSON: ${parseError}`);
-      res.status(500).json({ error: "Internal Server Error" });
+      // Parse the JSON output from the Python script
+      try {
+        const output = JSON.parse(stdout);
+        res.json(output);
+      } catch (parseError) {
+        console.error(`Error parsing JSON: ${parseError}`);
+        res.status(500).json({ error: "Internal Server Error" });
+      }
     }
-  });
+  );
 });
 
 const httpServer = http.createServer(app);

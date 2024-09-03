@@ -7,7 +7,7 @@ document
     const hour = document.getElementById("hourSelect").value;
 
     // Create the query string parameters for month and day
-    const queryParams = `?month=${month}&day=${day}&${hour}`;
+    const queryParams = `?month=${month}&day=${day}&hour=${hour}`;
 
     // Fetch the prognosis from the server
     fetch(`/prognosis${queryParams}`, {

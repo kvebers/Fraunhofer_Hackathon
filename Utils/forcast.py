@@ -53,9 +53,9 @@ X_train_ost, X_test_ost, y_train_ost, y_test_ost = train_test_split(X_ost, y_ost
 X_train_theresian, X_test_theresian, y_train_theresian, y_test_theresian = train_test_split(X_theresian, y_theresian, test_size=0.2, shuffle=False)
 
 # Train models
-model_mitte = XGBRegressor(objective='reg:squarederror', n_estimators=100, learning_rate=0.1)
-model_ost = XGBRegressor(objective='reg:squarederror', n_estimators=100, learning_rate=0.1)
-model_theresian = XGBRegressor(objective='reg:squarederror', n_estimators=100, learning_rate=0.1)
+model_mitte = XGBRegressor(objective='reg:squarederror', n_estimators=500, learning_rate=0.1)
+model_ost = XGBRegressor(objective='reg:squarederror', n_estimators=500, learning_rate=0.1)
+model_theresian = XGBRegressor(objective='reg:squarederror', n_estimators=500, learning_rate=0.1)
 
 model_mitte.fit(X_train_mitte, y_train_mitte)
 model_ost.fit(X_train_ost, y_train_ost)
