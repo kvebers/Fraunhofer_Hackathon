@@ -4,49 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Bootstrap CSS -->
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-	<!-- Bootstrap Bundle with Popper -->
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>Prognosis Form</title>
 </head>
 <body>
-    <h1>Parking Space Prognosis</h1>
+    <h1 class="text-center m-5">Parking Space Prognosis</h1>
+	<p class="text-center">Select a day and we will tell you if you if you will find a spot!</p>
     
-    <form id="prognosisForm">
-        <label for="monthSelect">Select the Month:</label>
-		<select id="monthSelect" name="monthSelect" class="form-select" required>
-			<option value="">Select a month</option>
-			<option value="1">January</option>
-			<option value="2">February</option>
-			<option value="3">March</option>
-			<option value="4">April</option>
-			<option value="5">May</option>
-			<option value="6">June</option>
-			<option value="7">July</option>
-			<option value="8">August</option>
-			<option value="9">September</option>
-			<option value="10">October</option>
-			<option value="11">November</option>
-			<option value="12">December</option>
-		</select>
+	<div class="row my-5">
+		<div class="col"></div>
+		<div class="col bg-dark p-5">
+		<form id="prognosisForm">
+			<select id="daySelect" name="daySelect" class="form-select" required>
+				<option value="">Select a day</option>
+				<!-- Options for days will be dynamically populated -->
+				<script>
+					for (let i = 1; i <= 31; i++) {
+						document.write(`<option value="${i}">${i}</option>`);
+					}
+				</script>
+			</select>
 
-		<label for="daySelect">Select the Day:</label>
-		<select id="daySelect" name="daySelect" required>
-			<option value="">Select a day</option>
-			<!-- Options for days will be dynamically populated -->
-			<script>
-				for (let i = 1; i <= 31; i++) {
-					document.write(`<option value="${i}">${i}</option>`);
-				}
-			</script>
-		</select>
+			<select id="monthSelect" name="monthSelect" class="form-select" required>
+				<option value="">Select a month</option>
+				<option value="1">January</option>
+				<option value="2">February</option>
+				<option value="3">March</option>
+				<option value="4">April</option>
+				<option value="5">May</option>
+				<option value="6">June</option>
+				<option value="7">July</option>
+				<option value="8">August</option>
+				<option value="9">September</option>
+				<option value="10">October</option>
+				<option value="11">November</option>
+				<option value="12">December</option>
+			</select>
 
-        <button type="submit">Submit</button>
-    </form>
+			<br>
+			<div class="d-flex justify-content-center">
+				<button type="submit" class="btn btn-light">Submit</button>
+			</div>
+		</form>
+	</div>
+	<div class="col"></div>
+	</div>
 
-    <div id="responseText"></div>
-
+	<div class="row bg-dark p-5">
+		<div class="col"></div>
+    	<div id="responseText" class="col text-white fs-1"></div>
+		<div class="col"></div>
+	</div>
     <script src="prognosis.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </body>
 </html>

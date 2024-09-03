@@ -1,6 +1,5 @@
 document.getElementById('prognosisForm').addEventListener('submit', function (event) {
     event.preventDefault();  // Prevent the form from submitting the traditional way
-
     const month = document.getElementById("monthSelect").value;
     const day = document.getElementById("daySelect").value;
 
