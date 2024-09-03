@@ -1,13 +1,8 @@
 document.getElementById('prognosisForm').addEventListener('submit', function (event) {
     event.preventDefault();  // Prevent the form from submitting the traditional way
 
-    // Get the value of the date input
-    const dateInput = document.getElementById('dateInput').value;
-
-    // Split the date value into year, month, and day
-    const date = new Date(dateInput);
-    const month = date.getMonth() + 1; // Months are 0-indexed, so add 1
-    const day = date.getDate();
+    const month = document.getElementById("monthSelect").value;
+    const day = document.getElementById("daySelect").value;
 
     // Create the query string parameters for month and day
     const queryParams = `?month=${month}&day=${day}`;

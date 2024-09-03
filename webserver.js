@@ -7,29 +7,34 @@ require("dotenv").config();
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, "client")));
+// Serve static files from the "client" directory
+app.use(express.static(path.join(__dirname)));
 
-const SOCKET_PORT = process.env.SOCKET_PORT || 8080;
-
-// Serve the JS file
-// app.get("/js/client.js", (req, res) => {
-//   const clientPath = path.join(__dirname, "js", "client.js");
-//   let updatedContent = fs.readFileSync(clientPath, "utf8");
-//   updatedContent = updatedContent
-//     .replace("{{IP}}", IP)
-//     .replace("{{PORT}}", SOCKET_PORT);
-
-//   res.setHeader("Content-Type", "application/javascript");
-//   res.send(updatedContent);
-//   console.log("client.js sent");
-// });
-
+// Serve the index.html file
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+// Serve the prognosis.js file
+app.get("/prognosis.js", (req, res) => {
+  res.sendFile(path.join(__dirname, "prognosis.js"));
+});
+
+// Handle GET requests to /prognosis
+app.get("/prognosis", (req, res) => {
+  const { month, day } = req.query;
+
+  // Here you can process the month and day parameters and generate a response
+  const response = {
+    message: `The prognosis for ${month}/${day} is looking good!`
+  };
+
+  res.json(response);
+});
+
+// Catch-all route to handle any other requests
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(__dirname, "client", "index.html"));
 });
 
 const httpServer = http.createServer(app);

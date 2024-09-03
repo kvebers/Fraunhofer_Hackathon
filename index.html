@@ -3,14 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap CSS -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap Bundle with Popper -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
     <title>Prognosis Form</title>
 </head>
 <body>
     <h1>Parking Space Prognosis</h1>
     
     <form id="prognosisForm">
-        <label for="dateInput">Choose a Date:</label>
-        <input type="date" id="dateInput" name="dateInput" required>
+        <label for="monthSelect">Select the Month:</label>
+		<select id="monthSelect" name="monthSelect" class="form-select" required>
+			<option value="">Select a month</option>
+			<option value="1">January</option>
+			<option value="2">February</option>
+			<option value="3">March</option>
+			<option value="4">April</option>
+			<option value="5">May</option>
+			<option value="6">June</option>
+			<option value="7">July</option>
+			<option value="8">August</option>
+			<option value="9">September</option>
+			<option value="10">October</option>
+			<option value="11">November</option>
+			<option value="12">December</option>
+		</select>
+
+		<label for="daySelect">Select the Day:</label>
+		<select id="daySelect" name="daySelect" required>
+			<option value="">Select a day</option>
+			<!-- Options for days will be dynamically populated -->
+			<script>
+				for (let i = 1; i <= 31; i++) {
+					document.write(`<option value="${i}">${i}</option>`);
+				}
+			</script>
+		</select>
 
         <button type="submit">Submit</button>
     </form>
