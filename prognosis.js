@@ -8,7 +8,7 @@ document
 
     // Create the query string parameters for month and day
     const queryParams = `?month=${month}&day=${day}&hour=${hour}`;
-	console.log(queryParams);
+    console.log(queryParams);
 
     // Fetch the prognosis from the server
     fetch(`/prognosis${queryParams}`, {
@@ -25,12 +25,13 @@ document
       })
       .then((data) => {
         // Handle the response data
-        document.getElementById("responseText").innerText =
-          data.mitte + data.ost + data.theresian; // Display the message from the JSON response
+        document.getElementById("responseText1").innerHTML =
+          data.mitte + "<br>" + data.ost + "<br>" + data.theresian;
+        console.log("something happened"); // Display the message from the JSON response
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
-        document.getElementById("responseText").innerText =
+        document.getElementById("responseText1").innerText =
           "Error fetching data. Please try again.";
       });
   });

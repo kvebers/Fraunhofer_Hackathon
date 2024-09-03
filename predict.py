@@ -94,11 +94,15 @@ def reverseNormalize(x, min, max):
     return x * (max - min) + min
 
 
+convert_to_predictions_mitte = int(reverseNormalize(y_pred_mitte[0], min_mitte, max_mitte) * 469)
+convert_to_predictions_ost = int(reverseNormalize(y_pred_ost[0], min_ost, max_ost) * 120)
+convert_to_predictions_theresian = int(reverseNormalize(y_pred_theresian[0], min_theresian, max_theresian) * 365 + 1.9)
+
 
 output = {
-    "mitte": f"{reverseNormalize(y_pred_mitte[0], min_mitte, max_mitte)}",
-    "ost": f"{reverseNormalize(y_pred_ost[0], min_ost, max_ost)}",
-    "theresian": f"{reverseNormalize(y_pred_theresian[0], min_theresian, max_theresian)}"
+    "mitte": f"{convert_to_predictions_mitte} / 469",
+    "ost": f"{convert_to_predictions_ost} / 120",
+    "theresian": f"{convert_to_predictions_theresian} / 700"
 }
 
 # Print the output as JSON
